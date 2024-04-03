@@ -17,7 +17,7 @@ pip install -r requirements.txt
 
 
 ## Compiling dataset
-We also release all of our raw datasets for the experiments in [link]() and the scripts for compiling the raw data to bin files in this Github repo. Before running the command, please create three dir: pkls, bins, and tmp. Then, you can simply run the following command to generate train.bin and val.bin.
+We also release all of our raw datasets for the experiments in [link]() and the scripts for compiling the raw data to bin files in this Github repo. Before running the command, please create three dir: ``pkls``, ``bins``, and ``tmp``. Then, you can simply run the following command to generate train.bin and val.bin.
 
 ```
 python3 data/statement_labels/prepare.py
