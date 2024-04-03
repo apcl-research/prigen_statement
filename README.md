@@ -1,58 +1,25 @@
-# jam_prigen
+# Code for replication of What Code Statements Affect Privacy?
 
+## To-do list
+- To set up your local environment, run the following command. We recommend the use of a virtual environment for running the experiments.
 
+```
+pip install -r requirements.txt
+```
+- Please download the dataset from [link]()
 
+## Compiling dataset
+We also release all of our raw datasets for the experiments in [link]() and the scripts for compiling the raw data to bin files in this Github repo. Before running the command, please create three dir: pkls, bins, and tmp. Then, you can simply run the following command to generate train.bin and val.bin.
 
-## RQ2: How closely does the machine prediction match human judgement?
-
-### Compiling training data
 ```
-python3 data/prigen_statement/purpose_advertisement/prepare.py
+python3 data/statement_labels/prepare.py
 ```
-
-### Compiling test data
+- Note that you will need to place ``testfid.pkl``, ``valfids.pkl`` and  ``unique_response_filter.pkl`` on ``/nublar/datasets/prigen/prigen_statement/new_data/`` or you will need to change the related parameters in the script.
+- Related parameters are as follows:
 ```
-python3 data/prigen_statement/testdatagen.py
-```
-
-### Finetuning
-```
-CUDA_DEVICE_ORDER='PCI_BUS_ID' CUDA_VISIBLE_DEVICES='2' OMP_NUM_THREADS=2 time torchrun --rdzv-backend=c10d --rdzv-endpoint=localhost:4222 --nnodes=1 --nproc_per_node=1 train.py config/finetune_statement_advert.py --outfilename=ckpt_stat_advert.pt
-```
-
-### Prediction
-```
-CUDA_DEVICE_ORDER='PCI_BUS_ID' CUDA_VISIBLE_DEVICES='2' python3 sample_statement.py config/finetune_statement_advert.py --outfilename=ckpt_stat_advert.pt --prediction_filename=statement_advert.txt --testdir=data/prigen_statement/purpose_advertisement/testset/ --max_new_tokens=1024
-```
-### Metrics
-```
-python3 accuracy_statement.py
+  --testfids-file: file lcation of function id on testset
+  --valfids-file: file location of function id on valset
+  --statement-file: file location of statements
 ```
 
-### Training prompt
-```
-CODE:\t<code>\nLABEL:\t<label> STATEMENT:<s>\t<statement1>\t<statement2\>\t<statement3></s>
-```
-
-## RQ3: Ablation study
-
-### Compiling training data
-```
-python3 prepare.py --prigen-file=/nublar/datasets/prigen/prigen_statement/purpose_advertisement/prigen_advertisement_all_allseq.pkl
-```
-### Compiling test data
-```
-python3 testdatagen.py --prigendats-file=/nublar/datasets/prigen/prigen_statement/purpose_advertisement/prigen_advertisement_all_allseq.pkl
-```
-### finetuning
-```
-CUDA_DEVICE_ORDER='PCI_BUS_ID' CUDA_VISIBLE_DEVICES='2, 3' OMP_NUM_THREADS=2 time torchrun --rdzv-backend=c10d --rdzv-endpoint=localhost:4222 --nnodes=1 --nproc_per_node=2 train.py config/finetune_prigen_advert.py --outfilename=ckpt_advert.pt --gradient_accumulation_steps=16
-```
-### Prediction
-```
-CUDA_DEVICE_ORDER='PCI_BUS_ID' CUDA_VISIBLE_DEVICES='2' python3 sample_prigen.py config/finetune_prigen_advert.py --outfilename=ckpt_advert.pt --prediction_filename=prigen_advert.txt --testdir=data/advert/testset/ --max_new_tokens=1024 --temperature=0.8
-```
-### Metrics
-```
-python3 accuracy_prigen.py 
-```
+## Finetuning
