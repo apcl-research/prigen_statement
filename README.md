@@ -1,5 +1,12 @@
 # Code for replication of What Code Statements Affect Privacy?
 
+## Quick link
+- [To-do list](#to-do-list)
+- [Compiling dataset](#compiling-dataset)
+- [Finetuning](#finetuning)
+- [Inference](#inference)
+- [Metrics](#metrics)
+
 ## To-do list
 - To set up your local environment, run the following command. We recommend the use of a virtual environment for running the experiments.
 
@@ -7,6 +14,7 @@
 pip install -r requirements.txt
 ```
 - Please download the dataset from [link]()
+
 
 ## Compiling dataset
 We also release all of our raw datasets for the experiments in [link]() and the scripts for compiling the raw data to bin files in this Github repo. Before running the command, please create three dir: pkls, bins, and tmp. Then, you can simply run the following command to generate train.bin and val.bin.
@@ -47,6 +55,28 @@ The script for inference with some parameters that you can change:
 --prediction_filename: file name of the prediction file
 --testdir: directory of the test set
 ```
+## Metrics
+We also provide the script for computing the metrics that we report in the paper.
 
+### Accuracy without order
+```
+python3 accuracy_statement.py --input={filename_of_your_prediction_file}
+```
 
-
+### Accuracy without order (at least one statement matching on two different participants)
+```
+python3 accuracy_statement_overall.py --input={filename_of_your_prediction_file}
+```
+### Accuracy in order
+```
+python3 accuracy_statement_order.py --input={filename_of_your_prediction_file}
+```
+### Accuracy in order (at least one statement matching on two different participants)
+```
+python3 accuracy_statement_order_overall.py --input={filename_of_your_prediction_file}
+```
+Those scripts come with some parameters that you can change:
+```
+--input: file name of the prediction file
+--prigen-file: file name of reference file
+```
