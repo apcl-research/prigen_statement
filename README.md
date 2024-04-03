@@ -34,7 +34,7 @@ python3 data/statement_labels/prepare.py
 These steps will show you how to fine-tune the model for statement prediction.
 
 ### Step 1: Download the finetuning dataset
-You can download all of the datasets in our paper in the [link](). Please place ``train.bin`` and ``val.bin`` to the same dir as --dataset in ``config/finetune_statement_advert.py``.
+You can download all of the datasets in our paper in the [link](). Please place ``train.bin`` and ``val.bin`` to the same dir as ``--dataset`` in ``config/finetune_statement_advert.py``.
 
 ### Step 2: Download the models for finetuning
 Please download the checkpoint files named ``ckpt_pretrain.pt`` in the [link]() for finetuning and place the checkpoint to the same dir as ``--out_dir`` in ``config/finetune_statement_advert.py``.
