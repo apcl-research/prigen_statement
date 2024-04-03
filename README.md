@@ -36,5 +36,17 @@ Please download the checkpoint files named ``ckpt_pretrain.pt`` in the [link]() 
 CUDA_DEVICE_ORDER='PCI_BUS_ID' CUDA_VISIBLE_DEVICES='0,1' OMP_NUM_THREADS=2 time torchrun --rdzv-backend=c10d --rdzv-endpoint=localhost:4000 --nnodes=1 --nproc_per_node=2 train.py config/finetune_statement_advert.py --outfilename=ckpt_pretrain.pt --gradient_accumulation_steps=16
 ```
 
+## Inference
+After you download the test set named ```` in the [link](), you can simiply run command below for inference.
+```
+CUDA_DEVICE_ORDER='PCI_BUS_ID' CUDA_VISIBLE_DEVICES='0' python3 sample_statement.py config/finetune_statement_advert.py --outfilename=ckpt_pretrain.pt --prediction_filename=statement_advert_filter.txt --testdir=data/statement_labels/testset/ --max_new_tokens=256
+```
+The script for inference with some parameters that you can change:
+```
+--outfilename: file name of the model
+--prediction_filename: file name of the prediction file
+--testdir: directory of the test set
+```
+
 
 
