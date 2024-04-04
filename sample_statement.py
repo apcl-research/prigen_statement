@@ -36,7 +36,6 @@ device_type = 'cuda' if 'cuda' in device else 'cpu' # for later use in torch.aut
 ptdtype = {'float32': torch.float32, 'bfloat16': torch.bfloat16, 'float16': torch.float16}[dtype]
 ctx = nullcontext() if device_type == 'cpu' else torch.amp.autocast(device_type=device_type, dtype=ptdtype)
 
-#pred_file = f'predict_{out_dir}.txt'
 
 if(not os.path.exists('prigen_predictions')):
     os.mkdir('prigen_predictions')
@@ -83,7 +82,6 @@ else:
     encode = lambda s: enc.encode(s, allowed_special={"<|endoftext|>"})
     decode = lambda l: enc.decode(l)
 
-#testfiles = pickle.load(open('data/adpac/test.pkl', 'rb'))
 
 arr = os.listdir(testdir)
 testfiles = []
@@ -118,12 +116,6 @@ for testfile in tqdm.tqdm(testfiles[:]):
         with ctx:
             for k in range(num_samples):
                 y = model.generate(x, max_new_tokens, temperature=temperature, top_k=top_k)
-                #probs = probs[prompt_len:max_new_tokens]
-                #mean_probs = probs[0]
-                #for j in range(1, len(probs)):
-                #    mean_probs = torch.add(mean_probs, probs[j])
-                #mean_probs = mean_probs / len(probs)
-                #alldata[fid] = {"prompt_len": prompt_len, "probs":mean_probs}
                 ret = decode(y[0].tolist())
                 ret = ret[:ret.find('<|endoftext|>')]
                 ret = ret.split('STATEMENT:')[1]
@@ -132,7 +124,6 @@ for testfile in tqdm.tqdm(testfiles[:]):
                 pf.write(f'{fid}\t{ret}\n')
 
                 pf.flush()
-    #pickle.dump(alldata, open("probs.pkl", "wb"))
 
 
 pf.close()
