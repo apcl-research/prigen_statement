@@ -13,16 +13,16 @@
 ```
 pip install -r requirements.txt
 ```
-- Please download the dataset from [link]()
+- Please download the dataset from [link](https://drive.google.com/drive/folders/17Us2z-_Qfe20B4APrO1Ta4WB39HBSUsw?usp=drive_link)
 
 
 ## Compiling dataset
-We also release all of our raw datasets for the experiments in [link]() and the scripts for compiling the raw data to bin files in this Github repo. Before running the command, please create three dir: ``pkls``, ``bins``, and ``tmp``. Then, you can simply run the following command to generate train.bin and val.bin.
+We also release all of our raw datasets for the experiments in ``raw_data.tar.gz`` [link](https://drive.google.com/drive/folders/17Us2z-_Qfe20B4APrO1Ta4WB39HBSUsw?usp=drive_link) and the scripts for compiling the raw data to bin files in this Github repo. Before running the command, please create three dir: ``pkls``, ``bins``, and ``tmp``. Then, you can simply run the following command to generate ``train.bin`` and ``val.bin``.
 
 ```
 python3 data/statement_labels/prepare.py
 ```
-- Note that you will need to place ``testfid.pkl``, ``valfids.pkl`` and  ``unique_response_filter.pkl`` on ``/nublar/datasets/prigen/prigen_statement/new_data/`` or you will need to change the related parameters in the script.
+- Note that you will need to place ``testfid.pkl``, ``valfids.pkl`` and  ``train.pkl`` on ``/nublar/datasets/prigen/prigen_statement/new_data/`` or you will need to change the related parameters in the script.
 - Related parameters are as follows:
 ```
   --testfids-file: file lcation of function id on testset
@@ -34,10 +34,10 @@ python3 data/statement_labels/prepare.py
 These steps will show you how to fine-tune the model for statement prediction.
 
 ### Step 1: Download the finetuning dataset
-You can download all of the datasets in our paper in the [link](). Please place ``train.bin`` and ``val.bin`` to the same dir as ``--dataset`` in ``config/finetune_statement_advert.py``.
+You can download all of the datasets in our paper in the [link](https://drive.google.com/drive/folders/17Us2z-_Qfe20B4APrO1Ta4WB39HBSUsw?usp=drive_link). Please place ``train.bin`` and ``val.bin`` to the same dir as ``--dataset`` in ``config/finetune_statement_advert.py``.
 
 ### Step 2: Download the models for finetuning
-Please download the checkpoint files named ``ckpt_pretrain.pt`` in the [link]() for finetuning and place the checkpoint to the same dir as ``--out_dir`` in ``config/finetune_statement_advert.py``.
+Please download the checkpoint files named ``ckpt_pretrain.pt`` in the [link](https://drive.google.com/drive/folders/17Us2z-_Qfe20B4APrO1Ta4WB39HBSUsw?usp=drive_link) for finetuning and place the checkpoint to the same dir as ``--out_dir`` in ``config/finetune_statement_advert.py``.
 
 ### Step 3: Finetuning model
 ```
@@ -45,9 +45,9 @@ CUDA_DEVICE_ORDER='PCI_BUS_ID' CUDA_VISIBLE_DEVICES='0,1' OMP_NUM_THREADS=2 time
 ```
 
 ## Inference
-After you download the test set named ```` in the [link](), you can simiply run command below for inference.
+After you download the test set named ``testset.tar.gz`` in the [link](https://drive.google.com/drive/folders/17Us2z-_Qfe20B4APrO1Ta4WB39HBSUsw?usp=drive_link), you can simiply run command below for inference.
 ```
-CUDA_DEVICE_ORDER='PCI_BUS_ID' CUDA_VISIBLE_DEVICES='0' python3 sample_statement.py config/finetune_statement_advert.py --outfilename=ckpt_pretrain.pt --prediction_filename=statement_advert_filter.txt --testdir=data/statement_labels/testset/ --max_new_tokens=256
+CUDA_DEVICE_ORDER='PCI_BUS_ID' CUDA_VISIBLE_DEVICES='0' python3 sample_statement.py config/finetune_statement_advert.py --outfilename=ckpt_pretrain.pt --prediction_filename=statement.txt --testdir=data/statement_labels/testset/ --max_new_tokens=256
 ```
 The script for inference with some parameters that you can change:
 ```
