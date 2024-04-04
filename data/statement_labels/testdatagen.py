@@ -19,8 +19,8 @@ random.seed(1337)
 if __name__=='__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--num-proc', type=int, default=4)
-    parser.add_argument('--testfids-file', type=str, default='/nublar/datasets/prigen/prigen_statement/new_data/testfid.pkl')
-    parser.add_argument('--statement-file', type=str, default='/nublar/datasets/prigen/prigen_statement/new_data/duplicates.pkl')
+    parser.add_argument('--testfids-file', type=str, default='/nublar/datasets/prigen/prigen_statement/raw_data/testfid.pkl')
+    parser.add_argument('--statement-file', type=str, default='/nublar/datasets/prigen/prigen_statement/raw_data/testA.pkl')
     parser.add_argument('--data-dir', type=str, default='testset/')
     
 

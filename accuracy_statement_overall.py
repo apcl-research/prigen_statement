@@ -7,9 +7,9 @@ import os
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='')
-    parser.add_argument('--input', type=str, default='prigen_predictions/statement_advert.txt')
-    parser.add_argument('--prigen-filea', type=str, default='/nublar/datasets/prigen/prigen_statement/purpose_advertisement/20231219/unique.pkl')
-    parser.add_argument('--prigen-fileb', type=str, default='/nublar/datasets/prigen/prigen_statement/new_data/duplicates.pkl')
+    parser.add_argument('--input', type=str, default='prigen_predictions/statement.txt')
+    parser.add_argument('--prigen-filea', type=str, default='/nublar/datasets/prigen/prigen_statement/testA.pkl')
+    parser.add_argument('--prigen-fileb', type=str, default='/nublar/datasets/prigen/prigen_statement/testB.pkl')
 
     args = parser.parse_args()
     input_file = args.input

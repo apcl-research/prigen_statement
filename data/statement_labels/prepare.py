@@ -22,9 +22,9 @@ number_to_english = {0:'ZERO', 1:'ONE', 2:'TWO', 3:'THREE', 4:'FOUR', 5:'FIVE', 
 if __name__=='__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--num-proc', type=int, default=4)
-    parser.add_argument('--testfids-file', type=str, default='/nublar/datasets/prigen/prigen_statement/new_data/testfid.pkl')
-    parser.add_argument('--valfids-file', type=str, default='/nublar/datasets/prigen/prigen_statement/new_data/valfids.pkl')
-    parser.add_argument('--statement-file', type=str, default='/nublar/datasets/prigen/prigen_statement/new_data/unique_response_filter.pkl')
+    parser.add_argument('--testfids-file', type=str, default='/nublar/datasets/prigen/prigen_statement/raw_data/testfid.pkl')
+    parser.add_argument('--valfids-file', type=str, default='/nublar/datasets/prigen/prigen_statement/raw_data/valfids.pkl')
+    parser.add_argument('--statement-file', type=str, default='/nublar/datasets/prigen/prigen_statement/raw_data/train.pkl')
     parser.add_argument('--data-dir', type=str, default='bins/')
 
     args = parser.parse_args()
