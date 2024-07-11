@@ -1,0 +1,12 @@
+openai.key
+__pycache__/
+prigen_predictions/
+data/*/pkls/
+data/*/bins/
+data/*/tmp/
+out_jam350m-jm_prigen/
+wandb/
+data/*/train.bin
+data/*/val.bin
+gpt/*.jsonl
+data/*/testset/
